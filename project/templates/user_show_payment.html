@@ -1,0 +1,22 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+  <div class="container">
+    <h2 class="mt-5 mb-4">{{ user.name }}'s Payments</h2>
+    <ul class="list-group">
+      {% for payment in payments %}
+        <li class="list-group-item">
+          <strong>Amount:</strong> {{ payment.amount }}<br>
+          <strong>Date:</strong> {{ payment.date }}<br>
+          <strong>Type:</strong> {{ payment.type }}
+          <div class="text-start mt-2">
+          <a href="{% url 'update_payment' payment.id %}" class="btn btn-primary ms-2">Update</a>
+          <a href="{% url 'delete_payment' payment.id %}" class="btn btn-danger ms-2">Delete</a>
+          </div>
+        </li>
+      {% empty %}
+        <li class="list-group-item">No payments found.</li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endblock %}

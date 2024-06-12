@@ -1,0 +1,33 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+  <h2>Trainers</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Surname</th>
+        <th scope="col">Email</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for trainer in trainers %}
+        <tr>
+          <td><a href="{% url 'trainer_detail' trainer.id %}">{{ trainer.name }}</a></td>
+          <td>{{ trainer.surname }}</td>
+          <td>{{ trainer.email }}</td>
+        </tr>
+      {% empty %}
+        <tr>
+          <td colspan="3">No trainers found.</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <h3>Create new Trainer:</h3>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+{% endblock %}

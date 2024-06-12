@@ -1,0 +1,31 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+  <div class="container mt-4">
+    <h2>Training Plans by {{ trainer.name }} {{ trainer.surname }}</h2>
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Plan Created</th>
+            <th scope="col">Description</th>
+            <th scope="col">User</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for plan in training_plans %}
+            <tr>
+              <td>{{ plan.created_at }}</td>
+              <td>{{ plan.description }}</td>
+              <td>{{ plan.user.name }} {{ plan.user.surname }}</td>
+            </tr>
+          {% empty %}
+            <tr>
+              <td colspan="3">No training plans found.</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+{% endblock %}

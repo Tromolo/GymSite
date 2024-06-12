@@ -1,0 +1,22 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+  <div class="container">
+    <h2 class="mt-5 mb-4">My Training Plans</h2>
+    <ul class="list-group">
+      {% for training_plan in training_plans %}
+        <li class="list-group-item">
+          <div class="row">
+            <div class="col-md-8">
+              <strong>Description:</strong> {{ training_plan.description }}<br>
+              <strong>Created by:</strong> {{ training_plan.trainer.name }} {{ training_plan.trainer.surname }}<br>
+              <strong>Created at:</strong> {{ training_plan.created_at }}
+            </div>
+          </div>
+        </li>
+      {% empty %}
+        <li class="list-group-item">No training plans found.</li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+  <div class="container">
+    <h2 class="mt-5 mb-4">{{ user.name }}'s Goals</h2>
+    <ul class="list-group">
+      {% for goal in goals %}
+        <li class="list-group-item">
+          <strong>Description:</strong> {{ goal.goal_description }}<br>
+          <strong>Target Date:</strong> {{ goal.target_date }}<br>
+          <strong>Status:</strong> {{ goal.status }}
+          <div class="text-start mt-2">
+            <a href="{% url 'update_goal' goal.id %}" class="btn btn-primary">Update</a>
+            <a href="{% url 'delete_goal' goal.id %}" class="btn btn-danger ms-2">Delete</a>
+          </div>
+        </li>
+      {% empty %}
+        <li class="list-group-item">No goals found.</li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endblock %}

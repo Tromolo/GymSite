@@ -1,0 +1,23 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+  <div class="container">
+    <h2 class="mt-5 mb-4">My Diet Plans</h2>
+    <ul class="list-group">
+      {% for diet_plan in diet_plans %}
+        <li class="list-group-item">
+          <div class="row">
+            <div class="col-md-8">
+              <strong>Description:</strong> {{ diet_plan.description }}<br>
+              <strong>Created by:</strong> {{ diet_plan.trainer.name }} {{ diet_plan.trainer.surname }}<br>
+              <strong>Type:</strong> {{ diet_plan.plan_type }}<br>
+              <strong>Created at:</strong> {{ diet_plan.created_at }}
+            </div>
+          </div>
+        </li>
+      {% empty %}
+        <li class="list-group-item">No diet plans found.</li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endblock %}

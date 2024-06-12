@@ -1,0 +1,52 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+  <h2>Users</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Surname</th>
+        <th scope="col">Email</th>
+        <th scope="col">Trainer</th>
+        <th scope="col">Assign</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for user in users %}
+        <tr>
+          <td><a href="{% url 'user_detail' user.id %}">{{ user.name }}</a></td>
+          <td>{{ user.surname }}</td>
+          <td>{{ user.email }}</td>
+          <td>
+            <select name="trainer" id="trainer{{ user.id }}">
+              {% for trainer in trainers %}
+                <option value="{{ trainer.id }}">{{ trainer.name }}</option>
+              {% endfor %}
+            </select>
+          </td>
+          <td>
+            <button type="button" onclick="assignTrainer({{ user.id }})">Assign</button>
+          </td>
+        </tr>
+      {% empty %}
+        <tr>
+          <td colspan="4">No users found.</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <h3>Add a new user:</h3>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+  
+  <script>
+    function assignTrainer(userId) {
+      var trainerId = document.getElementById('trainer' + userId).value;
+      window.location.href = '/assign_trainer/' + userId + '/' + trainerId + '/';
+    }
+  </script>
+{% endblock %}

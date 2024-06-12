@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Detail</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-4">
+        <h2 class="mb-3">{{ user.name }} {{ user.surname }}</h2>
+        <div class="card mb-4">
+            <div class="card-body">
+                <p>Email: {{ user.email }}</p>
+                <p>Phone: {{ user.phone }}</p>
+                <img src="https://via.placeholder.com/150" alt="User Photo" class="img-thumbnail">
+            </div>
+        </div>
+
+        <h3 class="mb-3">Assigned Trainer:</h3>
+        <ul class="list-group mb-4">
+            {% if user.trainer %}
+            <li class="list-group-item"><a href="{% url 'trainer_detail' user.trainer.id %}">{{ user.trainer.name }} {{ user.trainer.surname }}</a></li>
+            {% else %}
+                <li class="list-group-item">No trainer assigned yet.</li>
+            {% endif %}
+        </ul>
+
+        <a href="{% url 'user_training_plans' user.id %}" class="btn btn-primary mb-2">Show My Training Plans</a>
+        <a href="{% url 'user_diet_plans' user.id %}" class="btn btn-primary mb-2">Show My Diet Plans</a>
+        <a href="{% url 'create_goal' user.id %}" class="btn btn-primary mb-2">Create Goal</a>
+        <a href="{% url 'user_show_goal' user.id %}" class="btn btn-primary mb-2">Show My Goals</a>
+        <a href="{% url 'create_payment' user.id %}" class="btn btn-primary mb-2">Create payment</a>
+        <a href="{% url 'user_show_payment' user.id %}" class="btn btn-primary mb-2">Show my payments</a>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>

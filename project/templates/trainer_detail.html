@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trainer Detail</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-4">
+        <h2 class="mb-3">{{ trainer.name }} {{ trainer.surname }}</h2>
+        <div class="card mb-4">
+            <div class="card-body">
+                <p>Email: {{ trainer.email }}</p>
+                <p>Phone: {{ trainer.phone }}</p>
+                <p>Specialisation: {{ trainer.specialisation }}</p>
+                <p>Skills: {{ trainer.skills }}</p>
+                <img src="https://via.placeholder.com/150" alt="Trainer Photo" class="img-thumbnail">
+            </div>
+        </div>
+
+        <h3 class="mb-3">Assigned Users:</h3>
+        <ul class="list-group mb-4">
+            {% for user in trainer.users.all %}
+                <li class="list-group-item"><a href="{% url 'user_detail' user.id %}">{{ user.name }} {{ user.surname }}</a></li>
+            {% empty %}
+                <li class="list-group-item">No users assigned.</li>
+            {% endfor %}
+        </ul>
+
+        <a href="{% url 'create_training_plan' trainer.id %}" class="btn btn-primary mb-2">Create New Training Plan</a>
+        <a href="{% url 'create_diet_plan' trainer.id %}" class="btn btn-primary mb-2">Create New Diet Plan</a>
+        <a href="{% url 'trainer_show_training_plan' trainer.id %}" class="btn btn-primary mb-2">Show My Training Plans</a>
+        <a href="{% url 'trainer_show_diet_plan' trainer.id %}" class="btn btn-primary mb-2">Show My Diet Plans</a>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>
